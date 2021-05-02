@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Wkhtmltopdf.NetCore;
 
 namespace AppServiceHtml2PdfCore
 {
@@ -24,6 +25,7 @@ namespace AppServiceHtml2PdfCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddWkhtmltopdf();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
