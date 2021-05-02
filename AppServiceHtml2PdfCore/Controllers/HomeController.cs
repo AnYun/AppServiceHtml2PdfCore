@@ -6,16 +6,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Wkhtmltopdf.NetCore;
 
 namespace AppServiceHtml2PdfCore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        readonly IGeneratePdf _generatePdf;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IGeneratePdf generatePdf)
         {
-            _logger = logger;
+            _generatePdf = generatePdf;
         }
 
         public IActionResult Index()
@@ -26,6 +27,11 @@ namespace AppServiceHtml2PdfCore.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Pdf()
+        {
+            return await _generatePdf.GetPdf("Views/Home/Pdf.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
